@@ -36,6 +36,7 @@ db.once('open', () => {
 });
 
 io.on('connection', async (socket) => {
+    socket.emit("user count", io.sockets.sockets.size);
     const messages = await getRecentMessages();
     socket.emit('chat history', messages);
     socket.on('join user', async (data) => {
@@ -45,13 +46,12 @@ io.on('connection', async (socket) => {
         io.emit('chat message', { ...data, timestamp: new Date().toJSON() });
     });
     socket.on('disconnect', async (data) => {
+        socket.emit("user count", io.sockets.sockets.size);
         const message = '离开了聊天室';
         await saveMessage(socket.username, message);
         io.emit('chat message', { username: socket.username, message, timestamp: new Date().toJSON() });
     });
     socket.on('chat message', async (data) => {
-        console.log('data',data);
-        
         await saveMessage(data.username, data.message);
         io.emit('chat message', { ...data, timestamp: new Date().toJSON() });
     });
