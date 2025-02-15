@@ -1,0 +1,12 @@
+{
+    "name": "socket",
+    "version": "0.0.1",
+    "description": "socket.io app",
+    "type": "commonjs",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.21.2",
+        "mongoose": "^8.10.1",
+        "socket.io": "^4.8.1"
+    }
+}
