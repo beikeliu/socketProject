@@ -67,3 +67,8 @@ io.on('connection', async (socket) => {
 server.listen(3000, () => {
     console.log('server 运行成功！ http://localhost:3000');
 });
+
+app.get('/logg', async (req, res) => {
+    const logg = await Logg.find();
+    res.send(logg);
+})
